@@ -64,8 +64,8 @@ class truncated_normal_distribution
 private:
     ScalarT mean{};
     ScalarT sigma{};
-    ScalarT eps1{};
-    ScalarT eps2{};
+    std::optional<ScalarT> eps1{};
+    std::optional<ScalarT> eps2{};
     std::uniform_real_distribution<ScalarT> uniform_dist{};
     double cdf_n_eps2;
     double cdf_n_eps1;
@@ -94,7 +94,7 @@ public:
         // If eps1 has no value, it is assumed to be -infty
         if( eps1.has_value() )
         {
-            cdf_n_eps1 = cdf_gauss( eps1 );
+            cdf_n_eps1 = cdf_gauss( eps1.value() );
         }
         else
         {
@@ -105,7 +105,7 @@ public:
         // If eps2 has no value, it is assumed to be infty
         if( eps2.has_value() )
         {
-            cdf_n_eps2 = cdf_gauss( eps2 );
+            cdf_n_eps2 = cdf_gauss( eps2.value() );
         }
         else
         {
@@ -127,7 +127,7 @@ public:
 
     ScalarT pdf( ScalarT x )
     {
-        if( x < eps1 || x > eps2 )
+        if( x < eps1.value() || x > eps2.value() )
             return 0.0;
         else
             return 1.0 / ( cdf_n_eps2 - cdf_n_eps1 ) * pdf_gauss( x );
