@@ -2,7 +2,7 @@
 #include <cmath>
 #include <limits>
 
-namespace Seldon::Math
+namespace ProbabilityDist::Math
 {
 
 constexpr long double pi      = 3.1415926535897932384626433832795028841971693993751L;
