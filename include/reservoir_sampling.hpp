@@ -10,6 +10,11 @@
 namespace ProbabilityDist::ReservoirSampling
 {
 
+/**
+ * @brief Draw k non-repeating random numbers in the interval [0,n].
+ * the probability to draw a number i, is given by the weight callback
+ * as weight(i)
+ */
 template<typename WeightCallbackT, typename Generator>
 std::vector<std::size_t> reservoir_sampling_A_ExpJ( size_t k, size_t n, WeightCallbackT weight, Generator & gen )
 {
