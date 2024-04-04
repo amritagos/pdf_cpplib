@@ -37,7 +37,7 @@ std::vector<std::size_t> reservoir_sampling_A_ExpJ( size_t k, size_t n, WeightCa
         idx++;
     }
 
-    const double X = std::log( distribution( gen ) ) / std::log( H.top().second );
+    double X = std::log( distribution( gen ) ) / std::log( H.top().second );
     while( idx < n )
     {
         const auto w = weight( idx );
